@@ -28,13 +28,11 @@ $$\min_{\Theta} \sum_{i=1}^{N} w_i \left( C^{\text{market}}(K_i, T_i) - C^{\text
 Implied volatility is computed via the Newton-Raphson method:
 $$\sigma_{i+1}=\sigma_{i}-\frac{BS(\sigma_{i})-V_{market}}{Vega(\sigma_{i})}$$
 
-For some contracts, i.e. long maturities, deep ITM, deep OTM, Vega tends to zero, and we can thus not use the method. One could try to calculate the implied volatility with Brents method.
+For some contracts, i.e., long maturities, deep ITM, and deep OTM, Vega tends to zero, causing the NR method not to converge. For this reason, we had to exclude a quarter of the dataset from the parameter calibration scheme. One fix would be to use the Brent method.
 
-The optimal parameters obtained via the differential evolution optimization scheme had corner solutions, specifically the long term variance and the mean reversion rate obtained their maximal values, 0.25 and 1.5, respectively. 
+The optimal parameters obtained via the differential evolution optimization scheme had corner solutions; specifically, the long-term variance and the mean reversion rate obtained their maximal values, 0.25 and 1.5, respectively. 
 
-The heat map of the percentage market price error, shows that the optimization scheme predicts the prices well for a majority of the maturities and moneyness values, except for moneyness between 1.01-1.03. Furthermore, the concentration of errors seems to be around maturity times of 0.11 years or about 40 days. The Mean Squared Percentage Error (MSPE) in market prices is 1.3%. 
-
-Lastly, the implied volatility calculated via the prices of the optimal Heston parameters compared to the implied volatility of the Black Scholes model had a much greater discrepancy, around 16% MSPE. Thus, simply minimizing the a loss function dependent on option prices does not minimize the implied volatility. 
+The heat map of the percentage market price error shows that the optimization scheme predicts the prices well for a majority of the maturities and moneyness values, except for moneyness between 1.01 and 1.03. Furthermore, the concentration of errors seems to be around maturity times of 0.11 years or about 40 days. While parameter optimization achieved tight convergence in price space, about 1.3 % MSPE, transforming option prices back to Black-Scholes implied volatilities amplified errors to 16% MSPE, particularly driven by low-Vega OTM option contracts. Thus, simply minimizing the loss function dependent on option prices does not minimize the implied volatility. 
 
 
 
