@@ -37,6 +37,7 @@ The heat map of the percentage market price error shows that the optimization sc
 
 
 ## Project Structure
+```text
 ├── Figures                 # Results obtained 
 ├── heston_calibration.py   # Main script for IV surface extraction, pricing, & calibration
 └── README.md               # Project overview and documentation
